@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FRIENDS LIST</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="fonts/firasans.css">
+
+
+</head>
+<body>
+<div class="main">
+    <div class="friends-list-wrap">
+        <div class="title-box"><span class="friend-list-title">Выберите друзей</span><i id="resetButton" class="info-icon icon-reset" title="Сбросить сохраненные данные"></i></div>
+        <div class="search-box">
+            <input type="text" id="searchAll" class="friends-search search-main" placeholder="Начните вводить имя друга">
+            <input type="text" id="searchListAdded" class="friends-search search-second" placeholder="Начните вводить имя друга">
+        </div>
+        <div class="friends-lists">
+            <aside class="left-column columns">
+                <h3 class="list-title">Ваши друзья</h3>
+                <ul class="list" id="all_friends"  ondrop="drop_handler(event);" ondragover="dragover_handler(event);">
+                   <!-- <li class="f_item cf" id="{{ @index }}all" ondragstart="dragstart_handler(event);" draggable="true"></li>-->
+                </ul>
+            </aside>
+            <aside class="right-column columns">
+                <h3 class="list-title">Друзья в списке</h3>
+                <ul class="list" id="choosen_friends" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">
+                </ul>
+            </aside>
+        </div>
+        <div class="footer">
+            <a href="" id="saveFriends" class="save-btn">Сохранить</a>
+        </div>
+    </div>
+</div>
+
+
+<style id="all_friends_style">
+
+    #all_friends li:not([data-name*=]{
+			display:none;
+    }
+
+</style>
+
+<style id="added_friends_style">
+
+    #choosen_friends li:not([data-name*=]{
+			display:none;
+    }
+
+</style>
+<!-- output with Handlebars.js -->
+<script id="templateFriendsList" type="text/x-handlebars-template">
+    {{#each list}}
+
+    <li class="f_item" id="{{ @index }}all" ondragstart="dragstart_handler(event);" draggable="true" data-name="{{tolowercase first_name}} {{tolowercase last_name}}">
+        <div class="info">
+            <span class="info_name">{{first_name}} {{last_name}}</span>
+            <div class="img_wrap">
+                <img src="{{photo_50}}" alt="" class="img" draggable="false">
+            </div>
+            <i class="icon-add info-icon" data-name="mark"></i>
+        </div>
+    </li>
+
+    {{/each}}
+
+</script>
+<script id="templateFriendsAdded" type="text/x-handlebars-template">
+
+    {{#each list}}
+
+    <li class="f_item" id="{{ @index }}listed" ondragstart="dragstart_handler(event);" draggable="true" data-name="{{tolowercase first_name}} {{tolowercase last_name}}">
+        <div class="img_wrap">
+            <img src="{{photo_50}}" alt="{{first_name}} {{last_name}}" class="img" draggable="false">
+        </div>
+        <div class="info">
+            <span class="info_name">{{first_name}} {{last_name}}</span>
+            <i class="icon-remove info-icon" data-name="mark"></i>
+        </div>
+    </li>
+
+    {{/each}}
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/dragable.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
